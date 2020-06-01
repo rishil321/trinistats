@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load render_table from django_tables2 %}
+{% load static %}
+
+    {% block sidepanelcontents %}
+    <div class="panel-block">
+        <label class="panellabel"for="startdate">Start Date:</label>
+        <input class="custom-date-selector" type="date" value="{{ enteredstartdate }}" id="startdate" name="startdate">
+    </div>
+    <div class="panel-block">    
+        <label class="panellabel" for="enddate">End Date:</label>
+        <input class="custom-date-selector" type="date" value="{{ enteredenddate }}" id="enddate" name="enddate"/>
+    </div>
+    <div class="panel-block">   
+        <input type="hidden" value="date" name="sort"></input>
+        <input class="custom-red-button" type="submit" onclick="location.href='{% url 'stocks:markethistory' %}" value="Search"/>
+    </div>
+    {% endblock sidepanelcontents %}
+
+    {% block mainblock %}
+        <h2 style="" id="charttitle">Stock Market Index History</h2>
+        <!-- Chart -->
+        <div>
+        <canvas id="stockchart" width="4" height="1">
+            Stock Chart
+        </canvas>
+        </div>
+         <br>
+        <div class="tablediv">
+        {% render_table table %}
+        </div>
+    {% endblock mainblock %}
+
+    {% block chartjs %}
+    {{ graphlabels|json_script:"graphlabels" }}
+    {{ graphdataset|json_script:"graphdataset" }}
+    <script>
+    var ctx = document.getElementById('stockchart').getContext("2d");
+    var graphlabels = JSON.parse(document.getElementById('graphlabels').textContent);
+    var graphdataset = JSON.parse(document.getElementById('graphdataset').textContent);
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: graphlabels,
+            datasets: graphdataset
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Index Value'
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+    {% endblock chartjs %}
+    <!-- END MAIN -->
+    
+    <!--Javascript-->
+    {% block activepagetoggle %}
+    $("#markethistorylink").toggleClass("has-background-danger");
+    {% endblock %}
