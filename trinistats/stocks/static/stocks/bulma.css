@@ -7116,8 +7116,9 @@ print {
 .navbar.is-black .navbar-brand .navbar-link:focus,
 .navbar.is-black .navbar-brand .navbar-link:hover,
 .navbar.is-black .navbar-brand .navbar-link.is-active {
-  background-color: black;
+  background-color: grey;
   color: white;
+  border-radius: 0.2em;
 }
 
 .navbar.is-black .navbar-brand .navbar-link::after {
@@ -7149,8 +7150,9 @@ print {
   .navbar.is-black .navbar-end .navbar-link:focus,
   .navbar.is-black .navbar-end .navbar-link:hover,
   .navbar.is-black .navbar-end .navbar-link.is-active {
-    background-color: black;
+    background-color: grey;
     color: white;
+    border-radius: 0.2em;
   }
 
   .navbar.is-black .navbar-start .navbar-link::after,
