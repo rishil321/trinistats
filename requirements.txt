@@ -147,7 +147,7 @@ python-debian==0.1.39
 python-xapp==2.0.1
 python-xlib==0.29
 pyxdg==0.27
-PyYAML==5.3.1
+PyYAML==5.4
 reportlab==3.5.56
 requests-toolbelt==0.9.1
 requests-unixsocket==0.2.0
